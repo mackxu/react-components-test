@@ -5,7 +5,9 @@ import { locales } from './locale';
 import { useContext } from 'react';
 import { LocaleContext } from './LocaleContext';
 
-type MonthCalendarProps = CalendarProps;
+interface MonthCalendarProps extends CalendarProps {
+  onDaySelect?: (day: Dayjs) => void;
+}
 
 const weekdays = [
   'sunday',
@@ -17,7 +19,10 @@ const weekdays = [
   'saturday',
 ];
 
-export default function MonthCalendar({ value }: MonthCalendarProps) {
+export default function MonthCalendar({
+  value,
+  onDaySelect,
+}: MonthCalendarProps) {
   const localeKey = useContext(LocaleContext);
 
   const daysInMonth = getAllDaysInMonth(value);
@@ -32,7 +37,7 @@ export default function MonthCalendar({ value }: MonthCalendarProps) {
         ))}
       </div>
       <div className="calendar-month-body">
-        {renderDays(daysInMonth, value)}
+        {renderDays(daysInMonth, value, onDaySelect)}
       </div>
     </div>
   );
@@ -71,7 +76,11 @@ function getAllDaysInMonth(value: Dayjs) {
   return daysInfo;
 }
 
-function renderDays(daysInfo: DayItem[], value: Dayjs) {
+function renderDays(
+  daysInfo: DayItem[],
+  value: Dayjs,
+  onDaySelect: MonthCalendarProps['onDaySelect']
+) {
   // 实现6行7列的日历
   const rows = [];
   for (let i = 0; i < 6; i++) {
@@ -84,6 +93,7 @@ function renderDays(daysInfo: DayItem[], value: Dayjs) {
           className={classNames('calendar-month-body-cell', {
             'calendar-month-body-cell-current': isCurrentMonth,
           })}
+          onClick={() => onDaySelect?.(day)}
         >
           <div
             className={classNames({
