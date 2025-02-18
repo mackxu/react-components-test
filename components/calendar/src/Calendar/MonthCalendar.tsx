@@ -17,10 +17,10 @@ const weekdays = [
   'saturday',
 ];
 
-export default function MonthCalendar(props: MonthCalendarProps) {
+export default function MonthCalendar({ value }: MonthCalendarProps) {
   const localeKey = useContext(LocaleContext);
 
-  const daysInMonth = getAllDaysInMonth(props.value);
+  const daysInMonth = getAllDaysInMonth(value);
 
   return (
     <div className="calendar-month">
@@ -31,7 +31,9 @@ export default function MonthCalendar(props: MonthCalendarProps) {
           </div>
         ))}
       </div>
-      <div className="calendar-month-body">{renderDays(daysInMonth)}</div>
+      <div className="calendar-month-body">
+        {renderDays(daysInMonth, value)}
+      </div>
     </div>
   );
 }
@@ -69,7 +71,7 @@ function getAllDaysInMonth(value: Dayjs) {
   return daysInfo;
 }
 
-function renderDays(daysInfo: DayItem[]) {
+function renderDays(daysInfo: DayItem[], value: Dayjs) {
   // 实现6行7列的日历
   const rows = [];
   for (let i = 0; i < 6; i++) {
@@ -83,7 +85,14 @@ function renderDays(daysInfo: DayItem[]) {
             'calendar-month-body-cell-current': isCurrentMonth,
           })}
         >
-          {day.date()}
+          <div
+            className={classNames({
+              'calendar-month-body-cell-selected':
+                value.format('YYYY-MM-DD') === day.format('YYYY-MM-DD'),
+            })}
+          >
+            {day.date()}
+          </div>
         </div>
       );
     }
