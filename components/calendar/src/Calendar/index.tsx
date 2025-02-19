@@ -5,16 +5,22 @@ import Header from './Header';
 import { LocaleContext } from './LocaleContext';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import { useControllableValue } from 'ahooks';
 
 export interface CalendarProps {
-  value: Dayjs;
+  value?: Dayjs;
+  defaultValue?: Dayjs;
   onChange?: (day: Dayjs) => void;
   locale?: string;
 }
 
 const Calendar = (props: CalendarProps) => {
-  const [currDay, setCurrDay] = useState(props.value);
-  const [currMonth, setCurrMonth] = useState(props.value);
+  const [currDay, setCurrDay] = useControllableValue<Dayjs>(props, {
+    defaultValue: dayjs(),
+    valuePropName: 'value',
+    trigger: 'onChange',
+  });
+  const [currMonth, setCurrMonth] = useState(currDay);
 
   const selectHandler = (day: Dayjs) => {
     setCurrDay(day);

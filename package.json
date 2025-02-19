@@ -9,5 +9,8 @@
   },
   "keywords": [],
   "author": "xuyadong",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ahooks": "^3.8.4"
+  }
 }

@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { LocaleContext } from './LocaleContext';
 
 interface MonthCalendarProps extends CalendarProps {
+  value: Dayjs;
   currMonth: Dayjs;
   onDaySelect?: (day: Dayjs) => void;
 }
