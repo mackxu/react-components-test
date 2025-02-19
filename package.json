@@ -11,6 +11,8 @@
   "author": "xuyadong",
   "license": "ISC",
   "dependencies": {
-    "ahooks": "^3.8.4"
+    "@ant-design/icons": "^5.6.1",
+    "ahooks": "^3.8.4",
+    "antd": "^5.24.1"
   }
 }

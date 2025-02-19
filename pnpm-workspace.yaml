@@ -1,2 +1,4 @@
 packages:
   - 'components/*'
+
+dedupe-peer-dependents: false
