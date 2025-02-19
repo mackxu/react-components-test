@@ -23,6 +23,7 @@
 
 ## calendar
 
+- dayjs() 获取当前日期和时间
 - daysInMonth 获取当月有多少天
 - date() 获取当月几号
 - day() 获取星期几

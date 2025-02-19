@@ -4,6 +4,7 @@ import MonthCalendar from './MonthCalendar';
 import Header from './Header';
 import { LocaleContext } from './LocaleContext';
 import { useState } from 'react';
+import dayjs from 'dayjs';
 
 export interface CalendarProps {
   value: Dayjs;
@@ -20,11 +21,29 @@ const Calendar = (props: CalendarProps) => {
     setCurrMonth(day);
     props.onChange?.(day);
   };
+
+  const prevMonthHandler = () => {
+    setCurrMonth(currMonth.subtract(1, 'month'));
+  };
+
+  const nextMonthHandler = () => {
+    setCurrMonth(currMonth.add(1, 'month'));
+  };
   return (
     <LocaleContext.Provider value={props.locale ?? LocaleContext._currentValue}>
       <div className="calendar">
-        <Header currMonth={currMonth} />
-        <MonthCalendar {...props} value={currDay} onDaySelect={selectHandler} />
+        <Header
+          currMonth={currMonth}
+          prevMonthHandler={prevMonthHandler}
+          nextMonthHandler={nextMonthHandler}
+          todayHandler={() => selectHandler(dayjs())}
+        />
+        <MonthCalendar
+          {...props}
+          value={currDay}
+          currMonth={currMonth}
+          onDaySelect={selectHandler}
+        />
       </div>
     </LocaleContext.Provider>
   );

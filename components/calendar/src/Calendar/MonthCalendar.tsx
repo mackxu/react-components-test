@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { LocaleContext } from './LocaleContext';
 
 interface MonthCalendarProps extends CalendarProps {
+  currMonth: Dayjs;
   onDaySelect?: (day: Dayjs) => void;
 }
 
@@ -21,11 +22,12 @@ const weekdays = [
 
 export default function MonthCalendar({
   value,
+  currMonth,
   onDaySelect,
 }: MonthCalendarProps) {
   const localeKey = useContext(LocaleContext);
 
-  const daysInMonth = getAllDaysInMonth(value);
+  const daysInMonth = getAllDaysInMonth(currMonth);
 
   return (
     <div className="calendar-month">
