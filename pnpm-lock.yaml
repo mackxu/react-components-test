@@ -17,6 +17,12 @@ importers:
       antd:
         specifier: ^5.24.1
         version: 5.24.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      classnames:
+        specifier: ^2.5.1
+        version: 2.5.1
+      sass-embedded:
+        specifier: ^1.85.0
+        version: 1.85.0
 
   components/Space:
     dependencies:

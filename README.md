@@ -29,3 +29,12 @@
 - day() 获取星期几
 
 - 支持 `scss`，需安装 `sass-embedded` npm 包
+
+## Space
+
+direction: 设置子组件方向，水平还是竖直排列
+size：设置水平、竖直的间距
+align：子组件的对齐方式
+wrap：超过一屏是否换行，只在水平时有用
+split：分割线
+多个 Space 组件的 size 可以通过 ConfigProvider 统一设置默认值。
